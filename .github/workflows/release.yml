@@ -54,17 +54,17 @@ jobs:
       # Step 8: Run tests
       - name: Run tests - Tests.InfiniLore.Lucide
         run: |
-          ls -lh node_modules/lucide-static/icons || echo "Icons directory not found!"
+          ls -lh ${{ github.workspace }}/node_modules/lucide-static/icons || echo "Icons directory not found!"
           export NODE_PATH=${{ github.workspace }}/node_modules
           dotnet run -c Release --no-restore --no-build --framework net9.0
         working-directory: "tests/Tests.InfiniLore.Lucide"
       
       
       # Step 9: Publish to NuGet
-      - name: Publish to NuGet
-        env:
-          NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
-        run: |
-          dotnet nuget push src/InfiniLore.Lucide/bin/Release/*.nupkg --api-key $NUGET_API_KEY --source https://api.nuget.org/v3/index.json --skip-duplicate
-          dotnet nuget push src/InfiniLore.Lucide.Data/bin/Release/*.nupkg --api-key $NUGET_API_KEY --source https://api.nuget.org/v3/index.json --skip-duplicate
-          dotnet nuget push src/InfiniLore.Lucide.Generators.Raw/bin/Release/*.nupkg --api-key $NUGET_API_KEY --source https://api.nuget.org/v3/index.json --skip-duplicate
+      #- name: Publish to NuGet
+      #  env:
+      #    NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+      #  run: |
+      #    dotnet nuget push src/InfiniLore.Lucide/bin/Release/*.nupkg --api-key $NUGET_API_KEY --source https://api.nuget.org/v3/index.json --skip-duplicate
+      #    dotnet nuget push src/InfiniLore.Lucide.Data/bin/Release/*.nupkg --api-key $NUGET_API_KEY --source https://api.nuget.org/v3/index.json --skip-duplicate
+      #    dotnet nuget push src/InfiniLore.Lucide.Generators.Raw/bin/Release/*.nupkg --api-key $NUGET_API_KEY --source https://api.nuget.org/v3/index.json --skip-duplicate
