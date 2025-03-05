@@ -12,6 +12,8 @@
 //   - dotnet dotnet-cake --target=Build
 // See more at https://cakebuild.net/
 
+// Also, the version will use a tag if the branch the build is running on is tagged with a version
+
 using System.Text.RegularExpressions;
 
 // `target` indicates where to run through
@@ -111,6 +113,7 @@ Task("Test")
         });
     });
 
+// NuGet pack and publish
 Task("Pack")
     .IsDependentOn("Test")
     .Does<BuildData>((ctx, bd) =>
@@ -128,23 +131,52 @@ Task("Pack")
         });
     });
 
-//Task("PublishCoreLibraryToNuGet")
-//    .WithCriteria<BuildData>((ctx, bd) => bd.Version is not null)
-//    .IsDependentOn("Pack")
-//    .Does<BuildData>((ctx, bd) =>
-//    {
-//        var packPath = $"./src/nupkg/DataImportUtility.{bd.Version}.nupkg";
-//        Information($"Publishing package: {packPath}");
-//        DotNetNuGetPush(packPath, new()
-//        {
-//                ApiKey = nugetApiKey,
-//                Source = nugetApi
-//        });
-//    });
+Task("PublishCoreLibraryToNuGet")
+    .WithCriteria<BuildData>((ctx, bd) => bd.Version is not null)
+    .IsDependentOn("Pack")
+    .Does<BuildData>((ctx, bd) =>
+    {
+        var packPath = $"./nupkg/InfiniLore.Lucide.{bd.Version}.nupkg";
+        Information($"Publishing package: {packPath}");
+        DotNetNuGetPush(packPath, new()
+        {
+                ApiKey = nugetApiKey,
+                Source = nugetApi
+        });
+    });
+    
+Task("PublishDataLibraryToNuGet")
+    .WithCriteria<BuildData>((ctx, bd) => bd.Version is not null)
+    .IsDependentOn("Pack")
+    .Does<BuildData>((ctx, bd) =>
+    {
+        var packPath = $"./nupkg/InfiniLore.Lucide.Data.{bd.Version}.nupkg";
+        Information($"Publishing package: {packPath}");
+        DotNetNuGetPush(packPath, new()
+        {
+                ApiKey = nugetApiKey,
+                Source = nugetApi
+        });
+    });
+    
+Task("PublishSourceGenLibraryToNuGet")
+    .WithCriteria<BuildData>((ctx, bd) => bd.Version is not null)
+    .IsDependentOn("Pack")
+    .Does<BuildData>((ctx, bd) =>
+    {
+        var packPath = $"./nupkg/InfiniLore.Lucide.Generators.Raw.{bd.Version}.nupkg";
+        Information($"Publishing package: {packPath}");
+        DotNetNuGetPush(packPath, new()
+        {
+                ApiKey = nugetApiKey,
+                Source = nugetApi
+        });
+    });
 
 Task("GithubAction")
-    .IsDependentOn("Pack") // Remove after adding the PublishCoreLibraryToNuGet task
-    //.IsDependentOn("PublishCoreLibraryToNuGet")
+    .IsDependentOn("PublishCoreLibraryToNuGet")
+    .IsDependentOn("PublishDataLibraryToNuGet")
+    .IsDependentOn("PublishSourceGenLibraryToNuGet")
     ;
 
 //////////////////////////////////////////////////////////////////////
