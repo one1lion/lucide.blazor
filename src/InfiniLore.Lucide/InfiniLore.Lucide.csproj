@@ -20,6 +20,7 @@
         <PackageLicenseFile>LICENSE</PackageLicenseFile>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageIcon>icon.png</PackageIcon>
+		<PackageOutputPath>../../nupkg</PackageOutputPath>
     </PropertyGroup>
 
     <!-- Include external files -->
