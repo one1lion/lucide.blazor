@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.13.35825.156 d17.13
+VisualStudioVersion = 17.13.35825.156
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InfiniLore.Lucide.Generators.Raw", "src\InfiniLore.Lucide.Generators.Raw\InfiniLore.Lucide.Generators.Raw.csproj", "{CE629BED-BFFB-4C72-B5B0-62882E90CD0B}"
 EndProject
@@ -1579,9 +1579,12 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8EC462FD-D22E-90A8-E5CE-7E832BA40C5D}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
+		build-and-test-using-cake.yml = build-and-test-using-cake.yml
 		build.cake = build.cake
+		CONTRIBUTING.md = CONTRIBUTING.md
 		README.md = README.md
 		.github\workflows\release.yml = .github\workflows\release.yml
+		release-using-cake.yml = release-using-cake.yml
 	EndProjectSection
 EndProject
 Global
@@ -1626,5 +1629,8 @@ Global
 		{D29827FC-F0A3-4D7F-88BA-57281A77A066} = {6D9930C4-8D0C-4F21-98E4-C62FF787941E}
 		{12C0FAC8-BD5D-4464-BB93-4014D25999F4} = {C263AF12-5F3C-4AF6-9B2B-65BCE154F3A8}
 		{6B939B30-2BB1-4F8D-BD0B-417A43931DFF} = {1ED22B93-228B-465A-ACCC-CB61199AA88E}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {78746812-18D4-4CD5-B4E8-BEF990166498}
 	EndGlobalSection
 EndGlobal

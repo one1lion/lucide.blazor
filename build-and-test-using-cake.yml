@@ -1,0 +1,32 @@
+# .github/workflows/build-and-test.yml
+name: Build and Test
+
+on:
+  push:
+    branches: [ "core" ]
+  pull_request:
+    branches: [ "core" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0 # Needed for Git tags
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '9.0.x'
+
+    - name: Install Cake.Tool
+      run: dotnet tool restore
+
+    - name: Install npm dependencies
+      run: npm install
+
+    - name: Run Cake build script (Test target)
+      run: dotnet dotnet-cake --target=Test --rebuild
