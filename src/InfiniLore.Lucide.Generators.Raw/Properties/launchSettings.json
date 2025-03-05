@@ -1,9 +1,9 @@
-﻿{
-  "$schema": "https://json.schemastore.org/launchsettings.json",
+{
   "profiles": {
     "DebugRoslynSourceGenerator": {
       "commandName": "DebugRoslynComponent",
-      "targetProject": "../InfiniLore.Lucide.Generators/InfiniLore.Lucide.Generators.csproj"
+      "targetProject": "..\\InfiniLore.Lucide.Data\\InfiniLore.Lucide.Data.csproj"
     }
-  }
+  },
+  "$schema": "https://json.schemastore.org/launchsettings.json"
 }
